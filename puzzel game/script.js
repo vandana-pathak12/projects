@@ -2,21 +2,32 @@ let questions = [];
 let currentIndex = 0;
 let score = 0;
 let userAnswers = [];
+let selectedCategory = "";
+
 
 function showCategory() {
     document.getElementById("startScreen").classList.add("hide");
     document.getElementById("categoryScreen").classList.remove("hide");
 }
 
+
 async function startQuiz(type) {
+    selectedCategory = type;
+    currentIndex = 0;
+    score = 0;
+    userAnswers = [];
+
     document.getElementById("categoryScreen").classList.add("hide");
+    document.getElementById("resultScreen").classList.add("hide");
     document.getElementById("quizScreen").classList.remove("hide");
 
     let url = "";
 
     if (type === "gk") {
+        // General Knowledge
         url = "https://opentdb.com/api.php?amount=10&category=9&type=multiple";
     } else {
+        // Logical / Aptitude
         url = "https://opentdb.com/api.php?amount=10&type=multiple";
     }
 
@@ -34,6 +45,7 @@ async function startQuiz(type) {
 
 function loadQuestion() {
     const q = questions[currentIndex];
+
     document.getElementById("question").innerHTML =
         `Q${currentIndex + 1}. ${q.question}`;
 
@@ -50,6 +62,7 @@ function loadQuestion() {
     });
 }
 
+
 function nextQuestion() {
     const selected = document.querySelector('input[name="option"]:checked');
     userAnswers[currentIndex] = selected ? selected.value : null;
@@ -62,7 +75,10 @@ function nextQuestion() {
     }
 }
 
+
 function submitQuiz() {
+    score = 0;
+
     questions.forEach((q, i) => {
         if (userAnswers[i] === q.answer) {
             score++;
@@ -75,6 +91,24 @@ function submitQuiz() {
     document.getElementById("finalScore").innerText =
         `Your Score: ${score} / ${questions.length}`;
 }
+
+function restartQuiz() {
+    document.getElementById("resultScreen").classList.add("hide");
+    startQuiz(selectedCategory);
+}
+
+
+function goHome() {
+    document.getElementById("resultScreen").classList.add("hide");
+    document.getElementById("quizScreen").classList.add("hide");
+    document.getElementById("categoryScreen").classList.add("hide");
+    document.getElementById("startScreen").classList.remove("hide");
+
+    currentIndex = 0;
+    score = 0;
+    userAnswers = [];
+}
+
 
 function shuffle(arr) {
     return arr.sort(() => Math.random() - 0.5);
