@@ -8,13 +8,27 @@
     <link rel = "stylesheet" href="style.css">
 </head>
 <body>
-    <div class="box">
-    <h2>Logic puzzel Game</h2>
-    <p id="question"></p>
-    <div id="options"></div>
-    <button onclick="nextQuestions()">Next</button>
-    <p id="score"></p>
+
+<div class="container">
+
+    <div id="start-screen">
+        <h2>Logic Puzzle Quiz</h2>
+        <button onclick="startQuiz()">Start Quiz</button>
     </div>
+
+    <div id="quiz-screen" class="hide">
+        <h3 id="question"></h3>
+        <div id="options"></div>
+
+        <div class="controls">
+            <button onclick="prevQuestion()">Previous</button>
+            <button onclick="nextQuestion()">Next</button>
+        </div>
+
+        <p id="score"></p>
+    </div>
+
+</div>
     <script src="script.js"></script>
 
     
