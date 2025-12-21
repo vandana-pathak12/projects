@@ -3,45 +3,42 @@ body {
     background: linear-gradient(120deg, #667eea, #764ba2);
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    padding-top: 30px;
 }
 
 .container {
-    background: #fff;
-    width: 380px;
+    background: white;
+    width: 500px;
     padding: 20px;
     border-radius: 10px;
-    text-align: center;
+}
+
+.question {
+    margin-bottom: 15px;
+}
+
+.options label {
+    display: block;
+    margin: 5px 0;
+    cursor: pointer;
 }
 
 button {
-    padding: 10px 15px;
+    margin-top: 15px;
+    padding: 10px 20px;
     border: none;
+    background: #28a745;
+    color: white;
     border-radius: 5px;
     cursor: pointer;
 }
 
-#options button {
-    display: block;
-    width: 100%;
-    margin: 8px 0;
-    background: #667eea;
-    color: white;
+button:hover {
+    background: #218838;
 }
 
-.correct {
-    background: green !important;
+#result {
+    margin-top: 15px;
+    color: #333;
 }
 
-.wrong {
-    background: red !important;
-}
-
-.controls {
-    margin-top: 10px;
-}
-
-.hide {
-    display: none;
-}
