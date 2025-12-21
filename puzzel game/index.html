@@ -9,11 +9,33 @@
 </head>
 <body>
 
+
 <div class="container">
-    <h2>Mental Ability Test</h2>
-    <div id="quiz"></div>
-    <button id="submitBtn" onclick="submitQuiz()">Submit Test</button>
-    <h3 id="result"></h3>
+
+    <!-- Start Screen -->
+    <div id="startScreen">
+        <h2>Aptitude Test</h2>
+        <button onclick="showCategory()">Start Test</button>
+    </div>
+
+    <!-- Category Screen -->
+    <div id="categoryScreen" class="hide">
+        <h3>Select Question Type</h3>
+        <button onclick="startQuiz('gk')">General Knowledge</button>
+        <button onclick="startQuiz('logic')">Logical Reasoning</button>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div id="quizScreen" class="hide">
+        <div id="quiz"></div>
+        <button onclick="submitQuiz()">Submit Test</button>
+    </div>
+
+    <!-- Result Screen -->
+    <div id="resultScreen" class="hide">
+        <h2 id="finalScore"></h2>
+    </div>
+
 </div>
     <script src="script.js"></script>
 

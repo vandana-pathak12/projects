@@ -1,79 +1,66 @@
 let questions = [];
-let currentIndex = 0;
-let score = 0;
-let answered = false;
 
-async function startQuiz() {
-    document.getElementById("start-screen").classList.add("hide");
-    document.getElementById("quiz-screen").classList.remove("hide");
-
-    const res = await fetch("https://opentdb.com/api.php?amount=5&type=multiple");
+async function loadQuiz() {
+    const res = await fetch(
+        "https://opentdb.com/api.php?amount=10&category=9&type=multiple"
+    );
     const data = await res.json();
 
-    questions = data.results.map(q => ({
+    questions = data.results.map((q, index) => ({
+        id: index,
         question: q.question,
         options: shuffle([...q.incorrect_answers, q.correct_answer]),
         answer: q.correct_answer
     }));
 
-    loadQuestion();
+    displayQuestions();
 }
 
-function loadQuestion() {
-    answered = false;
-    const q = questions[currentIndex];
+function displayQuestions() {
+    const quizDiv = document.getElementById("quiz");
+    quizDiv.innerHTML = "";
 
-    document.getElementById("question").innerHTML = q.question;
-    document.getElementById("score").innerText = `Score: ${score}`;
+    questions.forEach((q, i) => {
+        const div = document.createElement("div");
+        div.className = "question";
 
-    const optionsDiv = document.getElementById("options");
-    optionsDiv.innerHTML = "";
+        div.innerHTML = `
+            <p><b>Q${i + 1}. ${q.question}</b></p>
+            <div class="options">
+                ${q.options.map(opt => `
+                    <label>
+                        <input type="radio" name="q${i}" value="${opt}">
+                        ${opt}
+                    </label>
+                `).join("")}
+            </div>
+        `;
 
-    q.options.forEach(option => {
-        const btn = document.createElement("button");
-        btn.innerHTML = option;
-        btn.onclick = () => checkAnswer(btn, option);
-        optionsDiv.appendChild(btn);
+        quizDiv.appendChild(div);
     });
 }
 
-function checkAnswer(button, selected) {
-    if (answered) return;
-    answered = true;
+function submitQuiz() {
+    let score = 0;
 
-    const correct = questions[currentIndex].answer;
+    questions.forEach((q, i) => {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if (selected && selected.value === q.answer) {
+            score++;
+        }
+    });
 
-    if (selected === correct) {
-        button.classList.add("correct");
-        score++;
-    } else {
-        button.classList.add("wrong");
-        document.querySelectorAll("#options button").forEach(btn => {
-            if (btn.innerHTML === correct) {
-                btn.classList.add("correct");
-            }
-        });
-    }
+    document.getElementById("result").innerText =
+        `Your Score: ${score} / ${questions.length}`;
 
-    setTimeout(nextQuestion, 1000);
+    document.getElementById("submitBtn").disabled = true;
 }
 
-function nextQuestion() {
-    if (currentIndex < questions.length - 1) {
-        currentIndex++;
-        loadQuestion();
-    }
+function shuffle(arr) {
+    return arr.sort(() => Math.random() - 0.5);
 }
 
-function prevQuestion() {
-    if (currentIndex > 0) {
-        currentIndex--;
-        loadQuestion();
-    }
-}
+loadQuiz();
 
-function shuffle(array) {
-    return array.sort(() => Math.random() - 0.5);
-}
 
 
