@@ -10,6 +10,7 @@ body {
 .container {
     background: #fff;
     width: 420px;
+    border: 2px solid black;
     padding: 20px;
     border-radius: 10px;
      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
