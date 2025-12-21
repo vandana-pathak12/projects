@@ -1,28 +1,47 @@
-body{
-    background:#f4f6f8;
+body {
     font-family: Arial;
+    background: linear-gradient(120deg, #667eea, #764ba2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
-.box{
-    width:350px;
-    background:rgb(172, 152, 152);
-    padding:20px;
-    margin:80px auto;
-    text-align:center;
-    border-radius:10px;
-}
-button{
-    display: block;
-    margin:10px auto;
-    padding:8px;
-    width:100%;
 
-    cursor:pointer;
+.container {
+    background: #fff;
+    width: 380px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
 }
-.option-btn{
-    background: #eee;
-    border:none;
-    margin:5px 0;
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
-.option-btn:hover{
-    background:#dc7a7a;
+
+#options button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    background: #667eea;
+    color: white;
+}
+
+.correct {
+    background: green !important;
+}
+
+.wrong {
+    background: red !important;
+}
+
+.controls {
+    margin-top: 10px;
+}
+
+.hide {
+    display: none;
 }
