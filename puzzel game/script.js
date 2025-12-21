@@ -1,4 +1,7 @@
 let questions = [];
+let currentIndex = 0;
+let score = 0;
+let userAnswers = [];
 
 function showCategory() {
     document.getElementById("startScreen").classList.add("hide");
@@ -14,49 +17,54 @@ async function startQuiz(type) {
     if (type === "gk") {
         url = "https://opentdb.com/api.php?amount=10&category=9&type=multiple";
     } else {
-        url = "https://opentdb.com/api.php?amount=10&category=18&type=multiple";
+        url = "https://opentdb.com/api.php?amount=10&type=multiple";
     }
 
     const res = await fetch(url);
     const data = await res.json();
 
-    questions = data.results.map((q, index) => ({
-        id: index,
+    questions = data.results.map(q => ({
         question: q.question,
         options: shuffle([...q.incorrect_answers, q.correct_answer]),
         answer: q.correct_answer
     }));
 
-    displayQuestions();
+    loadQuestion();
 }
 
-function displayQuestions() {
-    const quizDiv = document.getElementById("quiz");
-    quizDiv.innerHTML = "";
+function loadQuestion() {
+    const q = questions[currentIndex];
+    document.getElementById("question").innerHTML =
+        `Q${currentIndex + 1}. ${q.question}`;
 
-    questions.forEach((q, i) => {
-        quizDiv.innerHTML += `
-            <div class="question">
-                <p><b>Q${i + 1}. ${q.question}</b></p>
-                <div class="options">
-                    ${q.options.map(opt => `
-                        <label>
-                            <input type="radio" name="q${i}" value="${opt}">
-                            ${opt}
-                        </label>
-                    `).join("")}
-                </div>
-            </div>
+    const optionsDiv = document.getElementById("options");
+    optionsDiv.innerHTML = "";
+
+    q.options.forEach(opt => {
+        optionsDiv.innerHTML += `
+            <label>
+                <input type="radio" name="option" value="${opt}">
+                ${opt}
+            </label>
         `;
     });
 }
 
-function submitQuiz() {
-    let score = 0;
+function nextQuestion() {
+    const selected = document.querySelector('input[name="option"]:checked');
+    userAnswers[currentIndex] = selected ? selected.value : null;
 
+    if (currentIndex < questions.length - 1) {
+        currentIndex++;
+        loadQuestion();
+    } else {
+        submitQuiz();
+    }
+}
+
+function submitQuiz() {
     questions.forEach((q, i) => {
-        const selected = document.querySelector(`input[name="q${i}"]:checked`);
-        if (selected && selected.value === q.answer) {
+        if (userAnswers[i] === q.answer) {
             score++;
         }
     });
@@ -71,6 +79,4 @@ function submitQuiz() {
 function shuffle(arr) {
     return arr.sort(() => Math.random() - 0.5);
 }
-
-
 
