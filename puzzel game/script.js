@@ -1,9 +1,23 @@
 let questions = [];
 
-async function loadQuiz() {
-    const res = await fetch(
-        "https://opentdb.com/api.php?amount=10&category=9&type=multiple"
-    );
+function showCategory() {
+    document.getElementById("startScreen").classList.add("hide");
+    document.getElementById("categoryScreen").classList.remove("hide");
+}
+
+async function startQuiz(type) {
+    document.getElementById("categoryScreen").classList.add("hide");
+    document.getElementById("quizScreen").classList.remove("hide");
+
+    let url = "";
+
+    if (type === "gk") {
+        url = "https://opentdb.com/api.php?amount=10&category=9&type=multiple";
+    } else {
+        url = "https://opentdb.com/api.php?amount=10&category=18&type=multiple";
+    }
+
+    const res = await fetch(url);
     const data = await res.json();
 
     questions = data.results.map((q, index) => ({
@@ -21,22 +35,19 @@ function displayQuestions() {
     quizDiv.innerHTML = "";
 
     questions.forEach((q, i) => {
-        const div = document.createElement("div");
-        div.className = "question";
-
-        div.innerHTML = `
-            <p><b>Q${i + 1}. ${q.question}</b></p>
-            <div class="options">
-                ${q.options.map(opt => `
-                    <label>
-                        <input type="radio" name="q${i}" value="${opt}">
-                        ${opt}
-                    </label>
-                `).join("")}
+        quizDiv.innerHTML += `
+            <div class="question">
+                <p><b>Q${i + 1}. ${q.question}</b></p>
+                <div class="options">
+                    ${q.options.map(opt => `
+                        <label>
+                            <input type="radio" name="q${i}" value="${opt}">
+                            ${opt}
+                        </label>
+                    `).join("")}
+                </div>
             </div>
         `;
-
-        quizDiv.appendChild(div);
     });
 }
 
@@ -50,17 +61,16 @@ function submitQuiz() {
         }
     });
 
-    document.getElementById("result").innerText =
-        `Your Score: ${score} / ${questions.length}`;
+    document.getElementById("quizScreen").classList.add("hide");
+    document.getElementById("resultScreen").classList.remove("hide");
 
-    document.getElementById("submitBtn").disabled = true;
+    document.getElementById("finalScore").innerText =
+        `Your Score: ${score} / ${questions.length}`;
 }
 
 function shuffle(arr) {
     return arr.sort(() => Math.random() - 0.5);
 }
-
-loadQuiz();
 
 
 
