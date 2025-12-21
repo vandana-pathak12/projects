@@ -1,0 +1,28 @@
+body{
+    background:#f4f6f8;
+    font-family: Arial;
+}
+.box{
+    width:350px;
+    background:rgb(172, 152, 152);
+    padding:20px;
+    margin:80px auto;
+    text-align:center;
+    border-radius:10px;
+}
+button{
+    display: block;
+    margin:10px auto;
+    padding:8px;
+    width:100%;
+
+    cursor:pointer;
+}
+.option-btn{
+    background: #eee;
+    border:none;
+    margin:5px 0;
+}
+.option-btn:hover{
+    background:#dc7a7a;
+}
