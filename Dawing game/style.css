@@ -1,11 +1,30 @@
-  body {
-            text-align: center;
+        body {
             font-family: Arial;
+            background: #f4f4f4;
+            text-align: center;
         }
+
+        h2 {
+            margin-top: 10px;
+        }
+
+        .toolbar {
+            background: #fff;
+            padding: 10px;
+            margin: 10px auto;
+            width: 620px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #aaa;
+        }
+
         canvas {
             border: 2px solid black;
+            background: white;
             cursor: crosshair;
         }
-        .tools {
-            margin: 10px;
+
+        button {
+            padding: 5px 10px;
+            margin: 5px;
+            cursor: pointer;
         }
