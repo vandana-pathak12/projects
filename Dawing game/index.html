@@ -8,22 +8,25 @@
 </head>
 <body>
 
-<h2>Advanced Drawing App (Paint)</h2>
+<h2>Drawing App</h2>
 
 <div class="toolbar">
-    Color:
-    <input type="color" id="color" value="#000000">
+    Color: <input type="color" id="color" value="#000000">
+    Size: <input type="range" id="size" min="1" max="20" value="5">
 
-    Brush Size:
-    <input type="range" id="size" min="1" max="20" value="3">
+    Brush Type:
+    <select id="brush">
+        <option value="round">Round</option>
+        <option value="square">Square</option>
+        <option value="dotted">Dotted</option>
+        <option value="spray">Spray</option>
+        <option value="calligraphy">Calligraphy</option>
+    </select>
 
-    <button onclick="setBrush()">Brush</button>
-    <button onclick="setEraser()">Eraser</button>
     <button onclick="clearCanvas()">Clear</button>
-    <button onclick="saveImage()">Save</button>
 </div>
 
-<canvas id="canvas" width="600" height="400"></canvas>
+<canvas id="canvas" width="650" height="400"></canvas>
 
 <script src="script.js"></script>
     
