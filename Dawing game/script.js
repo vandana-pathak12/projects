@@ -6,18 +6,17 @@ canvas.height = 400;
 
 let drawing = false;
 
-// Mouse down → start drawing
+
 canvas.addEventListener("mousedown", () => {
     drawing = true;
 });
 
-// Mouse up → stop drawing
+
 canvas.addEventListener("mouseup", () => {
     drawing = false;
-    ctx.beginPath(); // new line start
+    ctx.beginPath(); 
 });
 
-// Mouse move → draw
 canvas.addEventListener("mousemove", draw);
 
 function draw(event) {
@@ -33,7 +32,7 @@ function draw(event) {
     ctx.moveTo(event.offsetX, event.offsetY);
 }
 
-// Clear button
+
 function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
