@@ -1,13 +1,13 @@
-body {
+      body {
             font-family: Arial;
             text-align: center;
-            background: #f2f2f2;
+            background: #baa7a7;
         }
         .toolbar {
-            background: #fff;
+            background: #88b8ce;
             padding: 10px;
             margin: 10px auto;
-            width: 700px;
+            width: 720px;
             box-shadow: 0 0 5px #aaa;
         }
         canvas {
