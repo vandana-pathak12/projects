@@ -1,13 +1,11 @@
-body {
-    text-align: center;
-    font-family: Arial;
-}
-
-canvas {
-    border: 2px solid black;
-    cursor: crosshair;
-}
-
-.controls {
-    margin-top: 10px;
-}
+  body {
+            text-align: center;
+            font-family: Arial;
+        }
+        canvas {
+            border: 2px solid black;
+            cursor: crosshair;
+        }
+        .tools {
+            margin: 10px;
+        }
