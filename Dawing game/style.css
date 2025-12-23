@@ -17,5 +17,7 @@
         }
         select, button, input {
             margin: 5px;
+            background-color: rgb(180, 175, 213);
+        
         }
  
